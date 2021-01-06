@@ -4,6 +4,12 @@ import java.text.NumberFormat;
 
 public class Printing {
 
+    private final NumberFormat currency;
+
+    public Printing() {
+        currency = NumberFormat.getCurrencyInstance();
+    }
+
     public void printPaymentSchedule(Client client) {
 
         byte years = client.getYears();
@@ -15,14 +21,14 @@ public class Printing {
         System.out.println("----------------");
         for (short month = 1; month <= monthsToPay; month++) {
             balance = Calculations.calculateBalance(client, month);
-            System.out.println(NumberFormat.getCurrencyInstance().format(balance));
+            System.out.println(currency.format(balance));
         }
     }
 
     public void printMortgage(Client client) {
 
         double mortgage = Calculations.calculateMortgage(client);
-        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
+        String mortgageFormatted = currency.format(mortgage);
         System.out.println();
         System.out.println("MORTGAGE");
         System.out.println("--------");
