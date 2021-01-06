@@ -1,0 +1,74 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Client {
+    private int principal;
+    private float annualInterest;
+    private byte years;
+    private Scanner scanner = new Scanner(System.in);
+
+    //constructor
+    public Client(){
+        setPrincipal(this.principal);
+        setAnnualInterest(this.annualInterest);
+        setYears(this.years);
+    }
+
+    //set principal value
+    public void setPrincipal(double value){
+        while(true){
+            System.out.println("Principal: ");
+            value = scanner.nextFloat();
+            if(value >= 1000 && value <= 1_000_000) {
+                this.principal = (int) value;
+                break;
+            }else{
+                System.out.println("Enter a value between 1000 and 1 000 000.");
+            }
+        }
+    }
+
+    //get principal value
+    public int getPrincipal(){
+        return this.principal;
+    }
+
+    //set annual interest
+    public void setAnnualInterest(float value){
+        while(true){
+            System.out.println("Annual Interest Rate: ");
+            value = scanner.nextFloat();
+            if(value >= 1 && value <= 30) {
+                this.annualInterest = value;
+                break;
+            }else{
+                System.out.println("Enter a value between 1 and 30.");
+            }
+        }
+    }
+
+    //get annual interest
+    public float getAnnualInterest(){
+        return this.annualInterest;
+    }
+
+    //set years
+    public void setYears(byte value){
+        while(true){
+            System.out.println("Period (Years): ");
+            value = scanner.nextByte();
+            if(value >= 1 && value <= 30) {
+                this.years = value;
+                break;
+            }else{
+                System.out.println("Enter a value between 1 and 30.");
+            }
+        }
+    }
+
+    //get years
+    public byte getYears(){
+        return this.years;
+    }
+}
