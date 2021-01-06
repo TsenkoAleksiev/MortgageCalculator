@@ -1,0 +1,49 @@
+package com.company;
+
+public class Calculations {
+
+    public static final byte MONTHS_IN_YEAR = 12;
+    public static final byte PERCENT = 100;
+
+    public static double calculateBalance(Client client, short month) {
+
+        int principal = client.getPrincipal();
+        float annualInterest = client.getAnnualInterest();
+        byte years = client.getYears();
+        short numberOfPaymentsMade = month;
+
+        float monthlyInterest = getMonthlyInterest(annualInterest);
+        float numberOfPayments = getNumberOfPayments(years);
+
+        double balance = principal
+                * (Math.pow(1 + monthlyInterest, numberOfPayments) - Math.pow(1 + monthlyInterest, numberOfPaymentsMade))
+                / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+
+        return balance;
+    }
+
+
+    public static double calculateMortgage( Client client) {
+
+        int principal = client.getPrincipal();
+        float annualInterest = client.getAnnualInterest();
+        byte years = client.getYears();
+
+        float monthlyInterest = getMonthlyInterest(annualInterest);
+        float numberOfPayments = getNumberOfPayments(years);
+
+        double mortgage = principal
+                * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
+                / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+
+        return mortgage;
+    }
+
+    private static float getMonthlyInterest(float annualInterest) {
+        return annualInterest / PERCENT / MONTHS_IN_YEAR;
+    }
+
+    private static int getNumberOfPayments(byte years) {
+        return years * MONTHS_IN_YEAR;
+    }
+}
